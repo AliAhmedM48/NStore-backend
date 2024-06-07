@@ -2,6 +2,7 @@ import mysql from "mysql2/promise";
 import { createDbTables } from "./createDbTables.js";
 
 const initializeMySQL = async (dbConfig) => {
+  console.log({ dbConfig });
   const connection = await mysql.createConnection({
     host: dbConfig.host,
     user: dbConfig.user,
@@ -19,9 +20,9 @@ const initializeMySQL = async (dbConfig) => {
         `CREATE DATABASE IF NOT EXISTS ${dbConfig.database}`
       );
       console.log(`Database ${dbConfig.database} created successfully!`);
-      await createDbTables();
-      console.log(`Tables created successfully!`);
     }
+    await createDbTables();
+    console.log(`Tables created successfully!`);
   } catch (error) {
     console.error("Error creating database:", error);
   } finally {
